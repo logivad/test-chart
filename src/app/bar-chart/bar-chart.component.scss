@@ -1,0 +1,57 @@
+$good: #32d574;
+$bad: #fe2844;
+
+.canvas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    outline: 1px solid;
+    width: 500px;
+    height: 300px;
+}
+
+.bar {
+    width: 14%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 12px;
+
+    &__yesterday {
+        width: 19%;
+        background-color: #ebf0f4;
+        transition: height 200ms linear;
+    }
+
+    &__today {
+        position: relative;
+        width: 76%;
+        background-color: #ebf0f4;
+        text-align: center;
+        padding-top: 1px;
+        box-sizing: border-box;
+        transition: height 200ms linear;
+
+        &--good {
+            color: $good;
+            background-color: $good;
+        }
+
+        &--bad {
+            color: $bad;
+            background-color: $bad;
+        }
+    }
+}
+
+.percent {
+    position: absolute;
+    width: 100%;
+    top: -16px;
+    text-align: center;
+}
+
+.total {
+    color: white;
+}

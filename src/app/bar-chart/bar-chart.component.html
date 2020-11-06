@@ -1,0 +1,21 @@
+<div class="canvas" [style.height.px]="canvasHeight">
+    <div
+        *ngFor="let item of data; trackBy: trackByIndex"
+        class="bar"
+    >
+        <div
+            class="bar__yesterday"
+            [style.height.px]="getHeight(item.yesterday)"
+        ></div>
+
+        <div
+            class="bar__today"
+            [class.bar__today--good]="item.good"
+            [class.bar__today--bad]="item.bad"
+            [style.height.px]="getHeight(item.today)"
+        >
+            <div class="percent">{{ item.percent > 0 ? '+': '' }}{{ item.percent }}%</div>
+            <div class="total">{{ item.todayK }}K</div>
+        </div>
+    </div>
+</div>
