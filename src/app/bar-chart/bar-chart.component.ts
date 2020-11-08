@@ -3,6 +3,7 @@ import {ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges} fro
 export interface BarChartItem {
     x: number;
     y: number;
+    title: string;
     preferDecrease?: boolean;
 }
 
