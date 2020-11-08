@@ -1,21 +1,35 @@
-<div class="canvas" [style.height.px]="canvasHeight">
-    <div
-        *ngFor="let item of data; trackBy: trackByIndex"
-        class="bar"
-    >
-        <div
-            class="bar__yesterday"
-            [style.height.px]="getHeight(item.yesterday)"
-        ></div>
+<div class="values">
+    <div class="value"><div class="value__text">2500</div></div>
+    <div class="value"><div class="value__text">2000</div></div>
+    <div class="value"><div class="value__text">1500</div></div>
+    <div class="value"><div class="value__text">1000</div></div>
+    <div class="value"><div class="value__text">500</div></div>
+    <div class="value"><div class="value__text">0</div></div>
+</div>
 
+<div class="canvas-wrap">
+    <div class="lines">
+        <div class="line" *ngFor="let line of lines"></div>
+    </div>
+    <div class="canvas" [style.height.px]="canvasHeight">
         <div
-            class="bar__today"
-            [class.bar__today--good]="item.good"
-            [class.bar__today--bad]="item.bad"
-            [style.height.px]="getHeight(item.today)"
+            *ngFor="let item of items; trackBy: trackByIndex"
+            class="bar"
         >
-            <div class="percent">{{ item.percent > 0 ? '+': '' }}{{ item.percent }}%</div>
-            <div class="total">{{ item.todayK }}K</div>
+            <div
+                class="bar__yesterday"
+                [style.height.px]="getHeight(item.x)"
+            ></div>
+
+            <div
+                class="bar__today"
+                [class.bar__today--good]="isGood(item)"
+                [class.bar__today--bad]="isBad(item)"
+                [style.height.px]="getHeight(item.y)"
+            >
+                <div class="percent">{{ getPercent(item) }}</div>
+                <div class="total">{{ getTotal(item) }}K</div>
+            </div>
         </div>
     </div>
 </div>

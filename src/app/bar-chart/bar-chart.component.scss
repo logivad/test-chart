@@ -1,13 +1,59 @@
 $good: #32d574;
 $bad: #fe2844;
+$grey: #ebf0f4;
+
+:host {
+    display: flex;
+    padding-bottom: 20px;
+
+    & > div {
+        margin-top: 40px;
+    }
+}
+
+.values {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-right: 10px;
+
+}
+
+.value {
+    height: 1px;
+
+    &__text {
+        position: relative;
+        bottom: 11px;
+    }
+}
+
+.canvas-wrap {
+    flex-grow: 1;
+    position: relative;
+}
+
+.lines {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.line {
+    height: 1px;
+    background-color: $grey;
+}
 
 .canvas {
     display: flex;
+    padding: 0 60px;
     flex-direction: row;
     justify-content: space-between;
-    outline: 1px solid;
-    width: 500px;
-    height: 300px;
 }
 
 .bar {
@@ -20,7 +66,7 @@ $bad: #fe2844;
 
     &__yesterday {
         width: 19%;
-        background-color: #ebf0f4;
+        background-color: $grey;
         transition: height 200ms linear;
     }
 

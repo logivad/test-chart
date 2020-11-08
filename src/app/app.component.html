@@ -15,11 +15,12 @@
 <p>
     <button (click)="chartData = dataSets[0]">Dataset 1</button>
     <button (click)="chartData = dataSets[1]">Dataset 2</button>
-    <button (click)="chartData = dataSets[2]">Dataset 3</button>
+    <button (click)="chartData = dataSets[2]">Log ladder up</button>
+    <button (click)="chartData = dataSets[3]">Log ladder down</button>
 </p>
 
 <app-bar-chart
     [items]="chartData"
-    [canvasHeight]="height"
     [linear]="!logarithmicScale"
+    [canvasHeight]="height"
 ></app-bar-chart>
