@@ -117,6 +117,14 @@ export class BarChartComponent implements OnChanges {
         return `${percent > 0 ? '+' : ''}${percent}%`;
     }
 
+    public isIncreasing(item: BarChartItem): boolean {
+        return item.y > item.x;
+    }
+
+    public isDecreasing(item: BarChartItem): boolean {
+        return item.y < item.x;
+    }
+
     public trackByIndex(i) {
         return i;
     }

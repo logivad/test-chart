@@ -32,7 +32,11 @@
                 [class.bar__today--bad]="isBad(item)"
                 [style.height.px]="getHeightByValue(item.y)"
             >
-                <div class="bar__percent">{{ getPercent(item) }}</div>
+                <div class="bar__percent">
+                    <span>{{ getPercent(item) }}</span>
+                    <app-icon-increase *ngIf="isIncreasing(item)"></app-icon-increase>
+                    <app-icon-decrease *ngIf="isDecreasing(item)"></app-icon-decrease>
+                </div>
                 <div class="bar__total">{{ getTotal(item) }}K</div>
                 <div class="bar__legend">
                     {{ item.title }}
