@@ -32,13 +32,13 @@
                 [class.bar__today--bad]="isBad(item)"
                 [style.height.px]="getHeightByValue(item.y)"
             >
-                <div class="percent">{{ getPercent(item) }}</div>
-                <div class="total">{{ getTotal(item) }}K</div>
+                <div class="bar__percent">{{ getPercent(item) }}</div>
+                <div class="bar__total">{{ getTotal(item) }}K</div>
+                <div class="bar__legend">
+                    {{ item.title }}
+                </div>
             </div>
 
-            <div class="bar__legend">
-                {{ item.title }}
-            </div>
         </div>
     </div>
 </div>

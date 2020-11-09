@@ -91,18 +91,19 @@ $grey: #ebf0f4;
         position: absolute;
         width: 100%;
         bottom: -24px;
+        color: black;
         text-align: center;
         font-size: 15px;
     }
-}
 
-.percent {
-    position: absolute;
-    width: 100%;
-    top: -16px;
-    text-align: center;
-}
+    &__percent {
+        position: absolute;
+        width: 100%;
+        top: -16px;
+        text-align: center;
+    }
 
-.total {
-    color: white;
+    &__total {
+        color: white;
+    }
 }
