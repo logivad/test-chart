@@ -9,6 +9,13 @@ export interface BarChartItem {
 
 export const defaultCanvasHeight = 300;
 
+enum Scale {
+    linear = 'linear',
+    log = 'log',
+}
+
+const linesNumber = 5;
+
 @Component({
     selector: 'app-bar-chart',
     templateUrl: './bar-chart.component.html',
@@ -18,23 +25,64 @@ export const defaultCanvasHeight = 300;
 export class BarChartComponent implements OnChanges {
     @Input() public items: Array<BarChartItem> = [];
     @Input() public canvasHeight = defaultCanvasHeight;
-    @Input() public linear = false;
 
     public valuePixelRatio = 0;
     public maxValue = 0;
-    public lines = [0, 50, 100, 150, 200, 250];
+    public lineValues: Array<number> = [];
+    public scale: Scale = Scale.log;
+    public scaleTypes = Scale;
 
     public ngOnChanges(changes: SimpleChanges) {
-        this.maxValue = this.items.reduce((max, item) => Math.max(max, item.x, item.y),0);
-        this.valuePixelRatio = this.linear
-            ? this.canvasHeight / this.maxValue
-            : this.canvasHeight / Math.log10(this.maxValue);
+        this.maxValue = this.items.reduce((max, item) => Math.max(max, item.x, item.y), 0);
+        this.valuePixelRatio = this.getValuePixelRatio();
+        this.lineValues = this.getLineValues(this.maxValue, this.scale);
     }
 
-    public getHeight(value) {
-        return this.linear
-            ? value * this.valuePixelRatio
-            : Math.log10(value) * this.valuePixelRatio;
+    public scaleChangeHandler(scale): void {
+        this.valuePixelRatio = this.getValuePixelRatio();
+        this.lineValues = this.getLineValues(this.maxValue, this.scale);
+    }
+
+    private getLineValues(max: number, scale: Scale) {
+        return Array(6).fill(null)
+            .map((el, i) => i * this.canvasHeight / 5)
+            .map(height => Math.round(this.getValueByHeight(height) / 1000));
+    }
+
+    private getValuePixelRatio(): number {
+        if (this.scale === Scale.linear) {
+            return this.canvasHeight / this.maxValue;
+        }
+
+        if (this.scale === Scale.log) {
+            return this.canvasHeight / Math.log10(this.maxValue);
+        }
+
+        throw new Error('Cannot calculate value pixel ratio');
+    }
+
+    public getValueByHeight(height): number {
+        if (this.scale === Scale.linear) {
+            return height / this.valuePixelRatio;
+        }
+
+        if (this.scale === Scale.log) {
+            return Math.pow(10, height / this.valuePixelRatio);
+        }
+
+        throw new Error('Cannot calculate value');
+    }
+
+    public getHeightByValue(value): number {
+        if (this.scale === Scale.linear) {
+            return value * this.valuePixelRatio;
+        }
+
+        if (this.scale === Scale.log) {
+            return Math.log10(value) * this.valuePixelRatio;
+        }
+
+        throw new Error('Cannot calculate height');
     }
 
     public isGood(item: BarChartItem): boolean {
@@ -65,7 +113,6 @@ export class BarChartComponent implements OnChanges {
         }
 
         const percent = Math.round(100 * (item.y / item.x - 1));
-        console.log(`[getPercent] item.y=${item.y}, item.x=${item.x} percent=${percent}`);
 
         return `${percent > 0 ? '+' : ''}${percent}%`;
     }

@@ -5,22 +5,14 @@
     </label>
 </p>
 
-<p>
-    <label>
-        Logarithmic scale
-        <input type="checkbox" [(ngModel)]="logarithmicScale">
-    </label>
-</p>
-
-<p>
+<p class="buttons">
     <button (click)="chartData = dataSets[0]">Dataset 1</button>
-    <button (click)="chartData = dataSets[1]">Dataset 2</button>
+    <button (click)="chartData = dataSets[1]">Linear ladder up</button>
     <button (click)="chartData = dataSets[2]">Log ladder up</button>
     <button (click)="chartData = dataSets[3]">Log ladder down</button>
 </p>
 
 <app-bar-chart
     [items]="chartData"
-    [linear]="!logarithmicScale"
     [canvasHeight]="height"
 ></app-bar-chart>

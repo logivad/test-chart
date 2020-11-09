@@ -3,21 +3,17 @@ $bad: #fe2844;
 $grey: #ebf0f4;
 
 :host {
-    display: flex;
-    padding-bottom: 20px;
-
-    & > div {
-        margin-top: 40px;
-    }
+    display: grid;
+    padding-bottom: 32px;
+    grid-template-columns: max-content auto;
+    gap: 30px 10px;
 }
 
 .values {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: space-between;
     align-items: flex-end;
-    padding-right: 10px;
-
 }
 
 .value {

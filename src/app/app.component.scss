@@ -1,3 +1,8 @@
 app-bar-chart {
     width: 600px;
+    margin-top: 48px;
+}
+
+.buttons button + button {
+    margin-left: 4px;
 }

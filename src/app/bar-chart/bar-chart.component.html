@@ -1,15 +1,20 @@
+<div>(K)</div>
+
+<div>
+    Operations
+    <select [(ngModel)]="scale" (ngModelChange)="scaleChangeHandler(scale)">
+        <option [value]="scaleTypes.log">Log</option>
+        <option [value]="scaleTypes.linear">Linear</option>
+    </select>
+</div>
+
 <div class="values">
-    <div class="value"><div class="value__text">2500</div></div>
-    <div class="value"><div class="value__text">2000</div></div>
-    <div class="value"><div class="value__text">1500</div></div>
-    <div class="value"><div class="value__text">1000</div></div>
-    <div class="value"><div class="value__text">500</div></div>
-    <div class="value"><div class="value__text">0</div></div>
+    <div class="value" *ngFor="let line of lineValues"><div class="value__text">{{ line }}</div></div>
 </div>
 
 <div class="canvas-wrap">
     <div class="lines">
-        <div class="line" *ngFor="let line of lines"></div>
+        <div class="line" *ngFor="let line of lineValues"></div>
     </div>
     <div class="canvas" [style.height.px]="canvasHeight">
         <div
@@ -18,14 +23,14 @@
         >
             <div
                 class="bar__yesterday"
-                [style.height.px]="getHeight(item.x)"
+                [style.height.px]="getHeightByValue(item.x)"
             ></div>
 
             <div
                 class="bar__today"
                 [class.bar__today--good]="isGood(item)"
                 [class.bar__today--bad]="isBad(item)"
-                [style.height.px]="getHeight(item.y)"
+                [style.height.px]="getHeightByValue(item.y)"
             >
                 <div class="percent">{{ getPercent(item) }}</div>
                 <div class="total">{{ getTotal(item) }}K</div>
